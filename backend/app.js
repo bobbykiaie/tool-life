@@ -1,14 +1,14 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const ejs = require("ejs");
-const mongoose = require('mongoose');
 
+const express = require("express");
+const mongoose = require('mongoose');
+const cors = require('cors');
+const productLineRoute = require('./routes/productLine-route');
 const app = express();
 
-app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+
+app.use(('/'), productLineRoute)
+
 
 
 
@@ -17,7 +17,9 @@ const connection = mongoose.connection;
 
 connection.once('open', () => {
   console.log("Successfully connected to MongoDB");
+  
 })
+console.log(mongoose.Document);
 
 const DataSchema = {
   distance: Number,
@@ -46,46 +48,27 @@ const ProductSchema = {
     components: [ComponentSchema]
 };
 
-const Product = mongoose.model("product", ProductSchema);
+const Products = mongoose.model("Product", ProductSchema);
+
+// const product = new Products ({
+//     name: "Lap fusion",
+//     components: [{
+//       name: "little Jaw",
+//       materialNumber: 101474663
+//     }]
+// })
 
 
 
-app.get("/", function(req, res){
-    res.render("home")
-});
+// app.get("/", function(req, res) {
+//   res.render
+//   console.log("hi");
+//   const body = Products.find({name: "Lap fusion"}, function(err,foundItems){
+//     console.log(foundItems);
+//   })
 
+// });
 
-app.get("/home", function(req, res){
-      res.render("home")
-  });
-
-  app.get("/data", function(req, res){
-        res.render("data")
-    });
-
-
-app.get("/:postId", function(req, res){
-
-const requestedPostId = req.params.postId;
-
-  Post.findOne({_id: requestedPostId}, function(err, post){
-    res.render("post", {
-      title: post.title,
-      content: post.content
-    });
-  });
-
-});
-
-app.get("/about", function(req, res){
-  res.render("about", {aboutContent: aboutContent});
-});
-
-app.get("/contact", function(req, res){
-  res.render("contact", {contactContent: contactContent});
-});
-
-
-app.listen(4000, function() {
+app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
