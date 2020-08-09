@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProductSelection from "./productsLines/pages/productSelection"
 
+
 const Styles = styled.div`
   .navbarP {
     padding: 0;
