@@ -7,7 +7,7 @@ import Product from "./product/pages/product.jsx";
 function App() {
   return (
     <Router>
-      <Route exact path="/">
+      <Route path="/">
         <ProductSelection />{" "}
       </Route>
       <Route path="/products/:pid">
