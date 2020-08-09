@@ -6,7 +6,7 @@ import Product from "./product/pages/product.jsx";
 
 function App() {
   return (
-    <Router basename="/">
+    <Router>
       <Route exact path="/">
         <ProductSelection />
       </Route>
