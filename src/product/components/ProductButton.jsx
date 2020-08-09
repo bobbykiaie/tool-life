@@ -10,7 +10,7 @@ const Styles = styled.div`
     background-color: #017179;
     color: white;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.2rem; 
   }
 
   .btn-xxl {
@@ -38,7 +38,7 @@ function ProductButton() {
       >
         {productLine.map((product) => (
           <Dropdown.Item
-            href={"/products/" + productLink(product)}
+            href={"/tool-life/products/" + productLink(product)}
             name={product}
           >
             {product}
