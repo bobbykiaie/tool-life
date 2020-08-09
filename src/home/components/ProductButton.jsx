@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 
 const Styles = styled.div`
+ margin-top:75px; 
   .btn-primary {
     background-color: #017179;
     color: white;
@@ -15,6 +16,8 @@ const Styles = styled.div`
   .btn-xxl {
     font-size: 1.5rem;
   }
+
+  .top-buffer { margin-top: 20px; }
 `;
 
 function ProductButton() {

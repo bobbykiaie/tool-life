@@ -1,5 +1,7 @@
-import React from 'react';
+    import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
+
 
 const useStyle = makeStyles(() => ({
     d: {
@@ -11,10 +13,10 @@ const useStyle = makeStyles(() => ({
     },
   }));
 
-const Description = () => {
+const Description = (props) => {
     const classes = useStyle();
     return (
-    <h1 className={classes.d}>Welcome to the Applied Medical Tool Life Data Tracker. Please select your product line from the drop down button below to get started</h1>
+    <h1 className={classes.d}>{props.onLoad}</h1>
     );
 }
 

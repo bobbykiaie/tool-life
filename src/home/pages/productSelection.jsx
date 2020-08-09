@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import NavigationBar from "./"
+import NavigationBar from "../../shared/NavigationBar";
 import ProductButton from "../components/ProductButton";
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import Description from "../components/Description.jsx"
 import Logo from "../components/logo.png";
 
 import Container from "react-bootstrap/Container";
@@ -16,29 +16,35 @@ const Styles = styled.div`
     padding: 0;
   }
   .buttonP {
+   
+  }
+  .appliedLogo {
+   
+    margin-top: 40px;
   }
 `;
 
 function ProductSelection() {
+  const page = "Tool Life Tracker";
   return (
     <Router>
       <React.Fragment>
         <Styles>
-          <Container>
-            <Row>
-              <Col className="navbarP" sm={12}>
-                <NavigationBar />
+          <Container fluid>
+            <Row className="justify-content-center">
+              <Col className="navbarP" px-md-0 md={12} lg={10}>
+                <NavigationBar onLoad={page}/>
               </Col>
             </Row>
-            <Row>
-              <Col lg={6}>
+            <Row className="justify-content-center">
+              <Col lg={5}>
                 <Description />
-                <Col className="buttonP" sm={(12, { order: "last" })} lg={6}>
+                <Col  lg={5}>
                     <ProductButton />
                 </Col>
               </Col>
-              <Col className="d-none d-lg-block" lg={6}>
-                <Image src={Logo} fluid />
+              <Col className="d-none d-lg-block" lg={5}>
+                <Image className="appliedLogo" src={Logo} fluid />
               </Col>
             </Row>
           </Container>
