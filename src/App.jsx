@@ -10,7 +10,7 @@ function App() {
       <Route exact path="/">
         <ProductSelection />
       </Route>
-      <Route path="/products/:pid">
+      <Route path="/tool-life/products/:pid">
         <Product />
       </Route>
     </Router>
