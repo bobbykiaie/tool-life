@@ -6,9 +6,9 @@ import Product from "./product/pages/product.jsx";
 
 function App() {
   return (
-    <Router>
-      <Route path="/">
-        <ProductSelection />{" "}
+    <Router basename="/tool-life">
+      <Route exact path="/">
+        <ProductSelection />
       </Route>
       <Route path="/products/:pid">
         <Product />

@@ -38,7 +38,7 @@ function ProductButton() {
       >
         {productLine.map((product) => (
           <Dropdown.Item
-            href={"/products/" + productLink(product)}
+            href={"/tool-life/products/" + productLink(product)}
             name={product}
           >
             {product}
