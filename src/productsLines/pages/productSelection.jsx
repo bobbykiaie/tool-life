@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import NavigationBar from "./"
 import ProductButton from "../components/ProductButton";
-import Description from './'
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
