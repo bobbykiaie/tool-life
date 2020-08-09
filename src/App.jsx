@@ -6,11 +6,11 @@ import Product from "./product/pages/product.jsx";
 
 function App() {
   return (
-    <Router basename="/tool-life">
+    <Router basename="/">
       <Route exact path="/">
         <ProductSelection />
       </Route>
-      <Route path="/tool-life/products/:pid">
+      <Route path="/products/:pid">
         <Product />
       </Route>
     </Router>
