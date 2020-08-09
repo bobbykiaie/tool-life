@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/tool-life/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/tool-life/static/js/main.b393e659.chunk.js",
-    "main.js.map": "/tool-life/static/js/main.b393e659.chunk.js.map",
+    "main.js": "/tool-life/static/js/main.a93794d1.chunk.js",
+    "main.js.map": "/tool-life/static/js/main.a93794d1.chunk.js.map",
     "runtime-main.js": "/tool-life/static/js/runtime-main.99faf148.js",
     "runtime-main.js.map": "/tool-life/static/js/runtime-main.99faf148.js.map",
     "static/js/2.81cb75ab.chunk.js": "/tool-life/static/js/2.81cb75ab.chunk.js",
     "static/js/2.81cb75ab.chunk.js.map": "/tool-life/static/js/2.81cb75ab.chunk.js.map",
     "index.html": "/tool-life/index.html",
-    "precache-manifest.ee3649eef4dc556620c16b42aeaca538.js": "/tool-life/precache-manifest.ee3649eef4dc556620c16b42aeaca538.js",
+    "precache-manifest.be8710fa3bdbaf176f1bc82d6649700b.js": "/tool-life/precache-manifest.be8710fa3bdbaf176f1bc82d6649700b.js",
     "service-worker.js": "/tool-life/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/tool-life/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.81cb75ab.chunk.js.LICENSE.txt": "/tool-life/static/js/2.81cb75ab.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.99faf148.js",
     "static/js/2.81cb75ab.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.b393e659.chunk.js"
+    "static/js/main.a93794d1.chunk.js"
   ]
 }
