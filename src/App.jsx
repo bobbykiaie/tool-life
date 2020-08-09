@@ -9,7 +9,7 @@ import Logo from "./components/logo.png";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ProductSelection from "./productsLines/pages/productSelection"
+import ProductSelection from "./productsLines/pages/productSelection.jsx"
 
 
 const Styles = styled.div`
@@ -36,9 +36,7 @@ function App() {
               <Col lg={6}>
                 <Description />
                 <Col className="buttonP" sm={(12, { order: "last" })} lg={6}>
-                 
                     <ProductButton />
-                 
                 </Col>
               </Col>
               <Col className="d-none d-lg-block" lg={6}>
