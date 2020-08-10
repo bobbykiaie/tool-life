@@ -34,7 +34,7 @@ function NavigationBar(prop) {
   return (
     <Styles>
       <Navbar collapseOnSelect expand="lg" variant="dark">
-        <Navbar.Brand href="#home">{prop.onLoad}</Navbar.Brand>
+        <Navbar.Brand>{prop.onLoad}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto"></Nav>
