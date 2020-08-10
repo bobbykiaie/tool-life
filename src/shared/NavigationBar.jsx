@@ -3,26 +3,30 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import styled from "styled-components";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
+  BrowserRouter as BRouter,
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
 } from "react-router-dom";
 
 const Styles = styled.div`
-  
- 
   .navbar {
     background-color: #017179;
     color: white;
-    
+  }
+  .home {
+    padding: 0;
   }
   .navbar-brand {
-    font-size: 4vw;
-    line-height: 2;
+    font-size: 5vw;
+    
     font-family: "Montserrat", sans-serif;
+    font-weight: light;
     color: white;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -33,12 +37,19 @@ function NavigationBar(prop) {
         <Navbar.Brand href="#home">{prop.onLoad}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-          </Nav>
+          <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link href="#deets">Home</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              My Applied
+            <Nav.Link>
+              <Router>
+                <Link className="nav-link home " to="/">
+                  Home
+                </Link>
+              </Router>
+            </Nav.Link>
+            <Nav.Link href="https://my.appliedmedical.com">
+             
+                  My Applied
+             
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

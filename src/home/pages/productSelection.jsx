@@ -32,14 +32,14 @@ function ProductSelection() {
         <Styles>
           <Container fluid>
             <Row className="justify-content-center">
-              <Col className="navbarP" px-md-0 md={12} lg={10}>
+              <Col className="navbarP px-xs-0"  md={12} lg={10}>
                 <NavigationBar onLoad={page}/>
               </Col>
             </Row>
             <Row className="justify-content-center">
               <Col lg={5}>
                 <Description />
-                <Col  lg={5}>
+                <Col xs={12} md={8} lg={6} xl={4}>
                     <ProductButton />
                 </Col>
               </Col>

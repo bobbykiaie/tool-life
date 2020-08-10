@@ -3,21 +3,24 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
+import { HashRouter as Router, Link } from "react-router-dom";
 
 const Styles = styled.div`
- margin-top:75px; 
+  margin-top: 75px;
   .btn-primary {
     background-color: #017179;
     color: white;
     width: 100%;
-    font-size: 1.2rem;
+  
   }
 
   .btn-xxl {
-    font-size: 1.5rem;
+
   }
 
-  .top-buffer { margin-top: 20px; }
+  .top-buffer {
+    margin-top: 20px;
+  }
 `;
 
 function ProductButton() {
@@ -33,15 +36,14 @@ function ProductButton() {
     <Styles>
       <DropdownButton
         id="dropdown-basic-button"
-        title="Dropdown button"
+        title="Select Product Line"
         background-color="#017179"
       >
         {productLine.map((product) => (
-          <Dropdown.Item
-            href={"/products/" + productLink(product)}
-            name={product}
-          >
-            {product}
+          <Dropdown.Item name={product}>
+            <Router>
+              <Link to={"/products/" + productLink(product)}>{product}</Link>
+            </Router>
           </Dropdown.Item>
         ))}
       </DropdownButton>
