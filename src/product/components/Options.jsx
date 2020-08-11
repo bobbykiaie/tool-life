@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import { HashRouter as Router, Link } from "react-router-dom";
 import ModalDialog from 'react-bootstrap/ModalDialog';
 import ModalHeader from 'react-bootstrap/ModalHeader';
@@ -37,7 +37,7 @@ function Options(props) {
           </Modal.Header>
           <Modal.Body>
           <p>Select the machining operation you will be tracking:</p>
-          <Button variant="outline-info"><Router><Link to={"/products/"+ selectedComponent + "/OP1"}>OP1</Link></Router></Button> <Button variant="outline-info">OP2</Button>
+          <Button variant="outline-info"><Router><Link to={"/products/"+ selectedComponent + "/OP1"}>OP1</Link></Router></Button> <Button variant="outline-info"><Router><Link to={"/products/"+ selectedComponent + "/OP2"}>OP2</Link></Router></Button>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
