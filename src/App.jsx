@@ -4,6 +4,8 @@ import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProductSelection from "./home/pages/productSelection.jsx";
 import Product from "./product/pages/product.jsx";
 import Tracking from "./tracking/pages/tracking.jsx";
+import Data from "./tracking/components/Data.jsx";
+import DataOne from "./tracking/components/DataOne.jsx";
 
 function App() {
   return (
@@ -14,8 +16,11 @@ function App() {
       <Route exact path="/products/:pid">
         <Product />
       </Route>
-      <Route path="/products/:pid/:oid">
+      <Route exact path="/products/:pid/:oid">
         <Tracking />
+      </Route>
+      <Route exact path="/products/:pid/:oid/data">
+        <DataOne />
       </Route>
     </Router>
   );

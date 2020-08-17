@@ -21,7 +21,10 @@
     "react-flexbox-grid": "^2.1.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "uniforms": "^3.0.0-rc.2",
+    "uniforms-bootstrap4": "^3.0.0-rc.2",
+    "uniforms-bridge-json-schema": "^3.0.0-rc.2"
   },
   "scripts": {
     "start": "react-scripts start",

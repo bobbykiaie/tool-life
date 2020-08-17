@@ -30,28 +30,37 @@ const Styles = styled.div`
   }
 `;
 
+
 function NavigationBar(prop) {
+  const theLink = prop.onLoad2;
+  const theData = prop.theData;
+  
   return (
     <Styles>
+
       <Navbar collapseOnSelect expand="lg" variant="dark">
         <Navbar.Brand>{prop.onLoad}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            
+            <Nav.Link>
               <Router>
                 <Link className="nav-link home " to="/">
                   Home
                 </Link>
               </Router>
-             <Router>
-                <Link className="nav-link home " to="https://my.appliedmedical.com">
+            </Nav.Link>
+            <Nav.Link href="https://my.appliedmedical.com">
                   My Applied
+            </Nav.Link>
+            <Nav.Link>
+            <Router>
+                <Link className="nav-link" to={theLink}>
+                  Data
                 </Link>
               </Router>
-            
-
+              </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
