@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { HashRouter as Router, Link } from "react-router-dom";
+import { HashRouter as Router, Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Forms from "./Form";
 
+const dataTable = [];
 const todaysData = [
-    { Tool: "No Tool Changes yet", Quantity: "-", Rotated: "-", Reason: "-" },
+  { Tool: "No Tool Changes yet", Quantity: "-", Rotated: "-", Reason: "-" },
 ];
 
-
 function DataInput(props) {
+  const page = useParams();
+  const pid = page.pid;
+  const cid = page.cid;
+  const oid = page.oid;
   const [show, setShow] = useState(false);
   const [dataSet, setDataSet] = useState({
     Tool: "",
@@ -44,24 +48,70 @@ function DataInput(props) {
       return { ...prevValue, [name]: value };
     });
   };
+  const sendRequest = async () => {
+    try {
+    const url =
+      "http://localhost:3200/products/" + pid + "/" + cid + "/" + oid + "/data";
+    const postData = await {
+      method: "POST",
+      headers: {'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tool: todaysData[todaysData.length - 1].Tool,
+        quantity: todaysData[todaysData.length - 1].Quantity,
+        rotated: todaysData[todaysData.length - 1].Rotated,
+        reason: todaysData[todaysData.length - 1].Reason,
+      }),
+    };
+    fetch(url, postData);
+    fetch(url);
 
-  const logData = (event) => {
-    event.preventDefault();
-    if (todaysData[0].Quantity === "-") {
-        todaysData.push(dataSet);
-        todaysData.shift();
-    } else todaysData.push(dataSet);
+    console.log("i sent")
+  } catch {
+    console.log("Nope");
     
-    console.log(todaysData);
-    console.log(todaysData);
-    passer(todaysData);
-    length(todaysData[todaysData.length-1]);
- 
+  }
+    
   };
 
-  const updateSingle = (event) => {
-     
+  const getRequest = async () => {
+    try {
+      const postData = {
+        method: "GET",
+        headers: {'Content-Type': 'application/json' },
+      };
+      const url = 
+        "http://localhost:3200/products/" + pid + "/" + cid + "/" + oid + "/data";
+      const response = await fetch(url, postData);
+      const responseData = await response.json();
+      console.log("i got a response");
+      // console.log(responseData[0].components);
+      const chosenComponent = responseData[0].components.filter(component => component.name === cid);
+      const chosenOperation = chosenComponent[0].programs.filter(operation => operation.name === oid);
+      console.log(chosenOperation)
+
+
+    }
+    catch {
+      console.log("Unable to get data from table")
+    }
   }
+ 
+  const logData = async (event) => {
+    event.preventDefault();
+    if (todaysData[0].Quantity === "-") {
+      todaysData.push(dataSet);
+      todaysData.shift();
+    } else todaysData.push(dataSet);
+
+
+    passer(todaysData);
+    length(todaysData[todaysData.length - 1]);
+  
+    await sendRequest();
+    await getRequest();
+    
+  };
+
 
   return (
     <>
@@ -75,7 +125,7 @@ function DataInput(props) {
         </Modal.Header>
 
         <Modal.Body>
-          <Form method="post" onSubmit={logData}>
+          <Form onSubmit={logData}>
             <Form.Group controlId="number">
               <Form.Label>Enter quantity:</Form.Label>
               <Form.Control
@@ -133,17 +183,15 @@ function DataInput(props) {
               </Form.Control>
             </Form.Group>
 
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose} type="submit">
               Close
             </Button>
             <Button
               variant="primary"
               type="submit"
               onClick={() => {
-               handleClose();
-              
+                handleClose();
               }}
-             
             >
               Save Changes
             </Button>

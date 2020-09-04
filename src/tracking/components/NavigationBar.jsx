@@ -20,7 +20,7 @@ const Styles = styled.div`
     padding: 0;
   }
   .navbar-brand {
-    font-size: 5vw;
+    font-size: 4vw;
     
     font-family: "Montserrat", sans-serif;
     font-weight: light;

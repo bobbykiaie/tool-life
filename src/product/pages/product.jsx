@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import NavigationBar from "../../shared/NavigationBar.jsx";
 import Description from "../components/Description.jsx";
 import ProductButton from "../components/ProductButton";
@@ -14,6 +14,7 @@ const Product = () => {
   const page = useParams();
   const description =
     "When you are a ready to perfrom a tool change, click the drop down menu below and select the tool number that you are changing";
+  
 
   console.log(page.pid);
   return (

@@ -16,10 +16,10 @@ function App() {
       <Route exact path="/products/:pid">
         <Product />
       </Route>
-      <Route exact path="/products/:pid/:oid">
+      <Route exact path="/products/:pid/:cid/:oid">
         <Tracking />
       </Route>
-      <Route exact path="/products/:pid/:oid/data">
+      <Route exact path="/products/:pid/:cid/:oid/data">
         <DataOne />
       </Route>
     </Router>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
@@ -22,15 +22,37 @@ const Styles = styled.div`
     margin-top: 20px;
   }
 `;
-
-function ProductButton() {
+const passedProducts = [{}];
+const  ProductButton = () => {
   const productLine = ["Open Fusion", "Fine"];
+  const [products, setProducts] = useState([{name: "-"}])
   const productLink = (product) => {
     const split = product.split(" ");
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     const newLink = split.reduce(reducer);
     return newLink;
   };
+ 
+ 
+      const sendRequest = async () => {
+        const response = await fetch('http://localhost:3200/products');
+
+        const responseData = await response.json();
+       
+        const products = responseData.products;
+        setProducts(products);
+     
+
+        
+
+      }
+      useEffect(() => {
+        sendRequest();
+      }, [])
+      
+     
+
+  
 
   return (
     <Styles>
@@ -39,10 +61,10 @@ function ProductButton() {
         title="Select Product Line"
         background-color="#017179"
       >
-        {productLine.map((product) => (
-          <Dropdown.Item name={product}>
+        {products.map((product) => (
+          <Dropdown.Item name={product.name}>
             <Router>
-              <Link to={"/products/" + productLink(product)}>{product}</Link>
+              <Link to={"/products/" + product.name}>{product.name}</Link>
             </Router>
           </Dropdown.Item>
         ))}
@@ -52,3 +74,4 @@ function ProductButton() {
 }
 
 export default ProductButton;
+export {passedProducts};

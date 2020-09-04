@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavigationBar from "../components/NavigationBar";
 import { HashRouter as Router, useParams } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -22,6 +22,9 @@ import styled from "styled-components";
 const Tracking = () => {
   const page = useParams();
   const theLink = page.oid + "/data";
+  const product =page.pid;
+  const component = page.cid;
+  const operation = page.oid;
 
   const Styles = styled.div`
 .card-img-top {
@@ -32,13 +35,35 @@ const Tracking = () => {
   `;
 
 
-  const DUMMYtools = [
+  const [tools, setTools] = useState([
     {name: "T1: 1/4" + " Roughing", image: "https://cdn11.bigcommerce.com/s-zbaqm/images/stencil/500x659/products/121389/422382/square-4fl-single-end-1__20617.1532441222.1280.1280__66048.1532455452__76708.1578586504.jpg?c=2&imbypass=on&imbypass=on"},
     {name: "T2: 1/4" + " Finishing", image: "https://cdn11.bigcommerce.com/s-zbaqm/images/stencil/500x659/products/121389/422382/square-4fl-single-end-1__20617.1532441222.1280.1280__66048.1532455452__76708.1578586504.jpg?c=2&imbypass=on&imbypass=on" },
    { name: "T3: 1/8" + " Roughing", image: "https://www.toolstoday.com/media/catalog/product/4/6/46225-k.jpg" },
     {name: "T1: 1/8" + " Finishing", image: "https://www.toolstoday.com/media/catalog/product/4/6/46225-k.jpg"}
-  ];
+  ]);
   
+  const sendRequest = async () => {
+    const url = "http://localhost:3200/products/" + product + "/" + component + "/" + operation;
+    const response = await fetch(url
+      
+    );
+      console.log(url)
+    const responseData = await response.json();
+
+   
+    const opArray = responseData.operations.programs;
+    const selectedOperation = opArray.find(op => op.name === operation);
+    const tools = selectedOperation.tools;
+    setTools(tools);
+    console.log(tools);
+    console.log("arse")
+ 
+  };
+
+  useEffect(() => {
+    sendRequest();
+  }, []);
+
   
   
   console.log(DataInput.todaysData);
@@ -58,7 +83,7 @@ const Tracking = () => {
     <Styles>
     <React.Fragment>
       <Container>
-        <NavigationBar goData={theData} onLoad2={theLink} onLoad={page.pid + " " + page.oid} />
+        <NavigationBar goData={theData} onLoad2={theLink} onLoad={page.cid + " " + page.oid} />
         <h5>Most Recent Tool Change. (Click Data in the heading menu to view all data)</h5>
         <Table striped bordered hover>
       <thead>
@@ -80,7 +105,7 @@ const Tracking = () => {
     </Table>
 
         <Row className="justify-content-center">
-          {DUMMYtools.map((tools) => (
+          {tools.map((tools) => (
             <Row>
               <Col style={{ padding: "5px" }} lg={2.5}>
                 <Card style={{ width: "18rem" }}>

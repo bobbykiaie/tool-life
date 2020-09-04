@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
-import { HashRouter as Router, Link } from "react-router-dom";
+import { HashRouter as Router, Link, useParams } from "react-router-dom";
 import Options from "./Options";
+
 
 const Styles = styled.div`
   margin-top: 75px;
@@ -28,9 +29,36 @@ const Styles = styled.div`
   }
 `;
 
-function ProductButton() {
-  const productLine = ["Upper Jaw", "Lower Jaw"];
 
+
+function ProductButton() {
+  const linkproduct = useParams();
+const productName = linkproduct.pid;
+console.log(productName);
+  const [components, setComponents] = useState([{name: "-"}])
+
+
+
+  
+    const sendRequest = async () => {
+      const response = await fetch('http://localhost:3200/products/'+productName);
+  
+      const responseData = await response.json();
+     
+      const components = await responseData.components.map(component => component.components);
+      
+      setComponents(components[0]);   
+      
+     
+        
+    }
+
+    useEffect(() => {
+    sendRequest();
+  
+  }, [])
+ 
+ 
 
   const productLink = (product) => {
     const split = product.split(" ");
@@ -39,6 +67,8 @@ function ProductButton() {
     return newLink;
   };
 
+ 
+
   return (
     <Styles>
       <DropdownButton
@@ -46,9 +76,9 @@ function ProductButton() {
         title="Select Component button"
         background-color="#017179"
       >
-        {productLine.map((product) => (
-          <Dropdown.Item name={product}>
-            <Options onload={product} />
+        {components.map((component) => (
+          <Dropdown.Item name={component.name}>
+            <Options passedProduct={productName} onload={component.name} />
           </Dropdown.Item>
         ))}
       </DropdownButton>
