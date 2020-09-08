@@ -27,7 +27,7 @@
     "uniforms-bridge-json-schema": "^3.0.0-rc.2"
   },
   "scripts": {
-    "start": "node backend/app.js",
+    "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
