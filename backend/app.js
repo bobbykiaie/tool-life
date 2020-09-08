@@ -24,7 +24,8 @@ app.use(('/'), productLineRoute)
 
 
 
-mongoose.connect("mongodb://localhost:27017/toolDB", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost:27017/toolDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-bobby:zabxyqzAbqo4panbox@cluster0.avhha.mongodb.net/<dbname>?retryWrites=true&w=majority", {useNewUrlParser: true});
 const connection = mongoose.connection;
 
 connection.once('open', () => {
