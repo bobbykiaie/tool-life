@@ -56,7 +56,8 @@ console.log(mongoose.Document);
 //   })
 
 // });
-
-app.listen(3200, function() {
-  console.log("Server started on port 3200");
-});
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3200;
+}
+app.listen(port);
