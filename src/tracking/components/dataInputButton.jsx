@@ -7,7 +7,7 @@ import { HashRouter as Router, Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Forms from "./Form";
 
-const dataTable = [];
+const dataTable = ["-",];
 const todaysData = [
   { Tool: "No Tool Changes yet", Quantity: "-", Rotated: "-", Reason: "-" },
 ];
@@ -62,8 +62,8 @@ function DataInput(props) {
         reason: todaysData[todaysData.length - 1].Reason,
       }),
     };
-    fetch(url, postData);
-    fetch(url);
+    await fetch(url, postData);
+  
 
     console.log("i sent")
   } catch {
@@ -85,10 +85,11 @@ function DataInput(props) {
       const responseData = await response.json();
       console.log("i got a response");
       // console.log(responseData[0].components);
-      const chosenComponent = responseData[0].components.filter(component => component.name === cid);
-      const chosenOperation = chosenComponent[0].programs.filter(operation => operation.name === oid);
-      console.log(chosenOperation)
-
+      const chosenComponent = await responseData[0].components.filter(component => component.name === cid);
+      const chosenOperation = await chosenComponent[0].programs.filter(operation => operation.name === oid);
+      return chosenOperation;
+     
+       
 
     }
     catch {
@@ -103,12 +104,15 @@ function DataInput(props) {
       todaysData.shift();
     } else todaysData.push(dataSet);
 
-
+ await sendRequest();
+  await getRequest();
+const rz = await getRequest();
+console.log(rz)
+console.log("SLim bean")
     passer(todaysData);
     length(todaysData[todaysData.length - 1]);
   
-    await sendRequest();
-    await getRequest();
+   
     
   };
 
@@ -203,4 +207,5 @@ function DataInput(props) {
 }
 
 export { todaysData };
+
 export default DataInput;

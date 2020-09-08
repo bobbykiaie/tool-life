@@ -5,24 +5,45 @@ import { todaysData } from "../components/dataInputButton.jsx";
 
 const TheTable = () => {
   const page = useParams();
-  const product =page.pid;
-  const component = page.cid;
-  const operation = page.oid;
+  const pid =page.pid;
+  const cid = page.cid;
+  const oid = page.oid;
   // const [todaysData, setTodaysData] = useState([{Tool: "arse", Quantity: "-", Rotated: "-", Reason: "-"}])
+  const [db, setDb] = useState([{name: "-"}]);
+  const [comp, setComp] = useState("None");
 
-  const sendRequest = async () => {
-    const url = "http://localhost:3200/products/" + product + "/" + component + "/" + operation + "/data"
-    const response = await fetch(url);
-      console.log(url)
-    const responseData = await response.json();
-    console.log("thetable")
+  const getRequest = async () => {
+    try {
+      const postData = {
+        method: "GET",
+        headers: {'Content-Type': 'application/json' },
+      };
+      const url = 
+        "http://localhost:3200/products/" + pid + "/" + cid + "/" + oid + "/data";
+      const response = await fetch(url, postData);
+      const responseData = await response.json();
+      console.log("i got a response");
+      // console.log(responseData[0].components);
+      const chosenComponent = await responseData[0].components.filter(component => component.name === cid);
+      const chosenOperation = await chosenComponent[0].programs.filter(operation => operation.name === oid);
+      const arse = await chosenOperation[0].history;
+      console.log(arse);
+      setDb(arse);
+    }
+    catch {
+      console.log("Unable to get data from table")
+    }
+  }
+  useEffect(() => {
+    getRequest();
     
-  };  
-
+  }, [])
  
 
+
   return (
-    <Table onLoad={sendRequest} striped bordered hover>
+    <React.Fragment>
+    <Table onLoad={getRequest} striped bordered hover>
       <thead>
         <tr>
             <th>Tool #</th>
@@ -32,16 +53,19 @@ const TheTable = () => {
         </tr>
       </thead>
       <tbody>
-          {todaysData.map((data) => (
+          {}
+          {db.map((data) => (
             <tr>
-                <td>{data.Tool}</td>
-              <td>{data.Quantity}</td>
-              <td>{data.Rotated}</td>
-              <td>{data.Reason}</td>
+                <td>{data.tool}</td>
+              <td>{data.quantity}</td>
+              <td>{data.rotated}</td>
+              <td>{data.reason}</td>
             </tr>
           ))}  
       </tbody>
     </Table>
+    <h1>{db[0].name}</h1>
+    </React.Fragment>
   );
 };
 

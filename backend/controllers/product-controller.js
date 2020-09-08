@@ -39,7 +39,7 @@ const getComponents = async (req, res, next) => {
 const getOperations = async (req, res, next) => {
   const productId = req.params.pid;
   const componentId = req.params.cid;
-  console.log(productId);
+
   let product;
   let selectedComponent;
   let operations;
@@ -65,7 +65,7 @@ const getTools = async (req, res, next) => {
   const productId = req.params.pid;
   const componentId = req.params.cid;
   const operationId = req.params.oid;
-  console.log(operationId);
+
   let product;
   let selectedComponent;
   let operations;
@@ -94,7 +94,7 @@ const postHandler = async (req, res, next) => {
   const operationId = req.params.oid;
   // console.log("this is the operation:" + operationId + "from the " + componentId + "of the product: " + productId);
   const { tool, quantity, rotated, reason } = req.body;
-  console.log(tool + quantity + rotated + reason);
+  
   let searched;
   let filteredComponent;
   let filteredOperation;
@@ -112,6 +112,7 @@ const postHandler = async (req, res, next) => {
       (name) => name.name === tool
     );
 
+    console.log(searched[0].components[0].programs[0].history)
 
     await Product.updateOne(
       { name: productId },
@@ -158,6 +159,22 @@ const postHandler = async (req, res, next) => {
         ],
       }
     );
+    await Product.updateOne(
+      { name: productId },
+      {
+        $push: {
+          "components.$[comp].programs.$[op].history": {tool: tool, quantity: quantity, rotated: rotated, reason: reason},
+        }
+      },
+      {
+        arrayFilters: [
+          { "comp.name": componentId },
+          { "op.name": operationId },
+        ],
+      }
+    );
+
+
   } catch (err) {
     const error = new HttpError(
       "Fetching users failed, please try again later.",

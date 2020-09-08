@@ -1,5 +1,6 @@
 import React from "react";
 import { todaysData } from "./dataInputButton.jsx";
+
 import NavigationBar from "../components/NavigationBar";
 import TheTable from "../components/TheTable.jsx";
 import Container from "react-bootstrap/Container";
@@ -8,6 +9,7 @@ import Col from "react-bootstrap/Col";
 
 const DataOne = (props) => {
   console.log("I was called upon");
+
   const theData = todaysData;
 
   return (

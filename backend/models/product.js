@@ -14,10 +14,17 @@ const ToolSchema = {
   image: String,
   data: [DataSchema]
 }
+const HistorySchema = {
+  tool: String,
+  quantity: Number,
+  rotated: String,
+  reason: String
+}
 
 const ProgramSchema = {
   name: String,
-  tools: [ToolSchema]
+  tools: [ToolSchema],
+  history: [HistorySchema]
 }
 
 const ComponentSchema = {
