@@ -67,7 +67,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 let port = process.env.PORT;
-if (port == null || port == "") {
+if (port == null || port == "PORT") {
   port = 3200;
 }
 app.listen(port);
