@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const productLineRoute = require('./routes/productLine-route');
 const app = express();
+const path = require('path');
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -56,6 +57,15 @@ console.log(mongoose.Document);
 //   })
 
 // });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
+  })
+}
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3200;

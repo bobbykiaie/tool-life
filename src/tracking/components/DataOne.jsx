@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 
 const DataOne = (props) => {
   console.log("I was called upon");
-
+  
   const theData = todaysData;
 
   return (
