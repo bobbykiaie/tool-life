@@ -23,7 +23,11 @@ app.use((req, res, next) => {
 app.use(('/'), productLineRoute)
 
 
+app.use(express.static('/public'));
 
+app.use((req, res, next) =>  {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+});
 
 // mongoose.connect("mongodb://localhost:27017/toolDB", {useNewUrlParser: true});
 mongoose.connect("mongodb+srv://admin-bobby:kiPAJQa8vWqsC7pw@cluster0.avhha.mongodb.net/toolDB?retryWrites=true&w=majority", {useNewUrlParser: true});
@@ -58,16 +62,10 @@ console.log(mongoose.Document);
 
 // });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../build'));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
-  })
-}
+
+
 
 let port = process.env.PORT;
-if (port == null || port == "PORT") {
-  port = 3200;
-}
-app.listen(port);
+
+app.listen(port || 3200);
