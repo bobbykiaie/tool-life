@@ -101,18 +101,10 @@ const postHandler = async (req, res, next) => {
   let changedTool;
   try {
     searched = await Product.find({ name: productId });
-    filteredComponent = await searched[0].components.filter(
-      (component) => component.name === componentId
-    );
-    filteredOperation = await filteredComponent[0].programs.filter(
-      (operation) => operation.name === operationId
-    );
-    // console.log("tool name is: " + tool);
-    changedTool = await filteredOperation[0].tools.filter(
-      (name) => name.name === tool
-    );
+    console.log("About to show searched")
+    console.log(searched);
 
-    console.log(searched[0].components[0].programs[0].history)
+  
 
     await Product.updateOne(
       { name: productId },
@@ -129,6 +121,7 @@ const postHandler = async (req, res, next) => {
         ],
       }
     );
+    console.log("I got to Quantity");
     await Product.updateOne(
       { name: productId },
       {
@@ -173,8 +166,10 @@ const postHandler = async (req, res, next) => {
         ],
       }
     );
-
-
+   res.json({
+     status: 200,
+     message: "arrrrrrrreehhh"
+   })
   } catch (err) {
     const error = new HttpError(
       "Fetching users failed, please try again later.",

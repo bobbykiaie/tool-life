@@ -50,9 +50,8 @@ function DataInput(props) {
   };
   const sendRequest = async () => {
     try {
-    const url =
-      "http://localhost:3200/products/" + pid + "/" + cid + "/" + oid + "/data";
-    const postData = await {
+    const url = "https://tool-life.herokuapp.com/products/" + pid + "/" + cid + "/" + oid + "/postdata";
+    const postData = {
       method: "POST",
       headers: {'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -62,10 +61,11 @@ function DataInput(props) {
         reason: todaysData[todaysData.length - 1].Reason,
       }),
     };
+    console.log(todaysData[todaysData.length - 1].Tool)
     await fetch(url, postData);
   
 
-    console.log("i sent")
+    
   } catch {
     console.log("Nope");
     
@@ -80,7 +80,7 @@ function DataInput(props) {
         headers: {'Content-Type': 'application/json' },
       };
       const url = 
-        "http://localhost:3200/products/" + pid + "/" + cid + "/" + oid + "/data";
+        "https://tool-life.herokuapp.com/products/" + pid + "/" + cid + "/" + oid + "/data";
       const response = await fetch(url, postData);
       const responseData = await response.json();
       console.log("i got a response");

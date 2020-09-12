@@ -35,7 +35,7 @@ const  ProductButton = () => {
  
  
       const sendRequest = async () => {
-        const response = await fetch('http://localhost:3200/products');
+        const response = await fetch('https://tool-life.herokuapp.com/products');
 
         const responseData = await response.json();
        

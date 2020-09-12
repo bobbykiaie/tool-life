@@ -18,7 +18,7 @@ const Options = (props) => {
   const [operation, setOperation] = useState([{ name: "-" }]);
 
   const sendRequest = async () => {
-    const url = "http://localhost:3200/products/" + product + "/" + selectedComponent
+    const url = "https://tool-life.herokuapp.com/products/" + product + "/" + selectedComponent
     const response = await fetch(url
       
     );

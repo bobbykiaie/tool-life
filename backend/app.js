@@ -23,11 +23,11 @@ app.use((req, res, next) => {
 app.use(('/'), productLineRoute)
 
 
-app.use(express.static('/public'));
+// app.use(express.static('/public'));
 
-app.use((req, res, next) =>  {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
-});
+// app.use((req, res, next) =>  {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'))
+// });
 
 // mongoose.connect("mongodb://localhost:27017/toolDB", {useNewUrlParser: true});
 mongoose.connect("mongodb+srv://admin-bobby:kiPAJQa8vWqsC7pw@cluster0.avhha.mongodb.net/toolDB?retryWrites=true&w=majority", {useNewUrlParser: true});

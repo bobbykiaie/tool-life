@@ -20,7 +20,7 @@ const Styles = styled.div`
     padding: 0;
   }
   .navbar-brand {
-    font-size: 4vw;
+    font-size: 2vw;
     
     font-family: "Montserrat", sans-serif;
     font-weight: light;
@@ -39,6 +39,7 @@ function NavigationBar(prop) {
     <Styles>
 
       <Navbar collapseOnSelect expand="lg" variant="dark">
+        
         <Navbar.Brand>{prop.onLoad}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

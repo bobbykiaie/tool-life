@@ -41,7 +41,7 @@ console.log(productName);
 
   
     const sendRequest = async () => {
-      const response = await fetch('http://localhost:3200/products/'+productName);
+      const response = await fetch(('https://tool-life.herokuapp.com/products/')+productName);
   
       const responseData = await response.json();
      

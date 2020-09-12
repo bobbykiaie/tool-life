@@ -36,14 +36,11 @@ const Tracking = () => {
 
 
   const [tools, setTools] = useState([
-    {name: "T1: 1/4" + " Roughing", image: "https://cdn11.bigcommerce.com/s-zbaqm/images/stencil/500x659/products/121389/422382/square-4fl-single-end-1__20617.1532441222.1280.1280__66048.1532455452__76708.1578586504.jpg?c=2&imbypass=on&imbypass=on"},
-    {name: "T2: 1/4" + " Finishing", image: "https://cdn11.bigcommerce.com/s-zbaqm/images/stencil/500x659/products/121389/422382/square-4fl-single-end-1__20617.1532441222.1280.1280__66048.1532455452__76708.1578586504.jpg?c=2&imbypass=on&imbypass=on" },
-   { name: "T3: 1/8" + " Roughing", image: "https://www.toolstoday.com/media/catalog/product/4/6/46225-k.jpg" },
-    {name: "T1: 1/8" + " Finishing", image: "https://www.toolstoday.com/media/catalog/product/4/6/46225-k.jpg"}
+    
   ]);
   
   const sendRequest = async () => {
-    const url = "http://localhost:3200/products/" + product + "/" + component + "/" + operation;
+    const url = "https://tool-life.herokuapp.com/products/" + product + "/" + component + "/" + operation;
     const response = await fetch(url
       
     );

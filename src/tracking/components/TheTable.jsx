@@ -19,7 +19,7 @@ const TheTable = () => {
         headers: {'Content-Type': 'application/json' },
       };
       const url = 
-        "http://localhost:3200/products/" + pid + "/" + cid + "/" + oid + "/data";
+        "https://tool-life.herokuapp.com/products/" + pid + "/" + cid + "/" + oid + "/data";
       const response = await fetch(url, postData);
       const responseData = await response.json();
       console.log("i got a response");

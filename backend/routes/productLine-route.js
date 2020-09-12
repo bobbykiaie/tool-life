@@ -14,7 +14,7 @@ router.get('/products/:pid/:cid', productsController.getOperations);
 
 router.get('/products/:pid/:cid/:oid', productsController.getTools);
 
-router.post('/products/:pid/:cid/:oid/data', productsController.postHandler);
+router.post('/products/:pid/:cid/:oid/postdata', productsController.postHandler);
 
 router.get('/products/:pid/:cid/:oid/data', productsController.getData);
 
