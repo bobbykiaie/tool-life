@@ -4,11 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import styled from "styled-components";
 import {
   HashRouter as Router,
-  BrowserRouter as BRouter,
-  Switch,
-  Route,
   Link,
-  useParams,
 } from "react-router-dom";
 
 const Styles = styled.div`
@@ -20,7 +16,7 @@ const Styles = styled.div`
     padding: 0;
   }
   .navbar-brand {
-    font-size: 2vw;
+    font-size: 4vw;
     
     font-family: "Montserrat", sans-serif;
     font-weight: light;
@@ -33,13 +29,11 @@ const Styles = styled.div`
 
 function NavigationBar(prop) {
   const theLink = prop.onLoad2;
-  const theData = prop.theData;
   
   return (
     <Styles>
 
       <Navbar collapseOnSelect expand="lg" variant="dark">
-        
         <Navbar.Brand>{prop.onLoad}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -55,13 +49,13 @@ function NavigationBar(prop) {
             <Nav.Link href="https://my.appliedmedical.com">
                   My Applied
             </Nav.Link>
-            <Nav.Link>
+           
             <Router>
                 <Link className="nav-link" to={theLink}>
                   Data
                 </Link>
               </Router>
-              </Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

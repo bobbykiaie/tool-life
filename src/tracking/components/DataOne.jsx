@@ -19,6 +19,7 @@ const DataOne = (props) => {
           <Col md={10}>
             <NavigationBar onLoad="Data Page" />
             <TheTable />
+           
           </Col>
         </Row>
       </Container>

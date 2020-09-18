@@ -37,33 +37,6 @@ connection.once('open', () => {
   console.log("Successfully connected to MongoDB");
   
 })
-console.log(mongoose.Document);
-
-
-
-// const Products = mongoose.model("Product", ProductSchema);
-
-// const product = new Products ({
-//     name: "Lap fusion",
-//     components: [{
-//       name: "little Jaw",
-//       materialNumber: 101474663
-//     }]
-// })
-
-
-
-// app.get("/", function(req, res) {
-//   res.render
-//   console.log("hi");
-//   const body = Products.find({name: "Lap fusion"}, function(err,foundItems){
-//     console.log(foundItems);
-//   })
-
-// });
-
-
-
 
 
 let port = process.env.PORT;

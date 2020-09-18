@@ -52,24 +52,23 @@ const getOperations = async (req, res, next) => {
     operations = await selectedComponent;
   } catch (err) {
     const error = new HttpError(
-      "Fetching users failed, please try again later.",
+      "Fetching components failed, please try again later.",
       500
     );
     return next(error);
   }
 
   res.json({ operations });
-  // res.json({ components: components.map(component => component.toObject({ getters: true })) });
+ 
 };
 const getTools = async (req, res, next) => {
   const productId = req.params.pid;
   const componentId = req.params.cid;
-  const operationId = req.params.oid;
 
   let product;
   let selectedComponent;
   let operations;
-  let operation;
+
   try {
     product = await Product.find({ name: productId });
     components = await product[0].components;
@@ -79,30 +78,26 @@ const getTools = async (req, res, next) => {
     operations = await selectedComponent;
   } catch (err) {
     const error = new HttpError(
-      "Fetching users failed, please try again later.",
+      "Fetching components failed, please try again later.",
       500
     );
     return next(error);
   }
   res.json({ operations });
-  // res.json({ components: components.map(component => component.toObject({ getters: true })) });
+
 };
 
 const postHandler = async (req, res, next) => {
   const productId = req.params.pid;
   const componentId = req.params.cid;
   const operationId = req.params.oid;
-  // console.log("this is the operation:" + operationId + "from the " + componentId + "of the product: " + productId);
   const { tool, quantity, rotated, reason } = req.body;
   
   let searched;
-  let filteredComponent;
-  let filteredOperation;
-  let changedTool;
+
   try {
     searched = await Product.find({ name: productId });
-    console.log("About to show searched")
-    console.log(searched);
+
 
   
 
@@ -121,7 +116,7 @@ const postHandler = async (req, res, next) => {
         ],
       }
     );
-    console.log("I got to Quantity");
+
     await Product.updateOne(
       { name: productId },
       {
@@ -168,7 +163,7 @@ const postHandler = async (req, res, next) => {
     );
    res.json({
      status: 200,
-     message: "arrrrrrrreehhh"
+     message: "Successful"
    })
   } catch (err) {
     const error = new HttpError(
@@ -181,8 +176,7 @@ const postHandler = async (req, res, next) => {
 
 const getData = async (req, res, next) => {
   const productId = req.params.pid;
-  const componentId = req.params.cid;
-  const operationId = req.params.oid;
+
 
   let theData;
 

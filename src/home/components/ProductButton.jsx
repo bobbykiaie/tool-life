@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
 import { HashRouter as Router, Link } from "react-router-dom";
 
 const Styles = styled.div`
@@ -11,11 +10,9 @@ const Styles = styled.div`
     background-color: #017179;
     color: white;
     width: 100%;
-  
   }
 
   .btn-xxl {
-
   }
 
   .top-buffer {
@@ -23,36 +20,20 @@ const Styles = styled.div`
   }
 `;
 const passedProducts = [{}];
-const  ProductButton = () => {
-  const productLine = ["Open Fusion", "Fine"];
-  const [products, setProducts] = useState([{name: "-"}])
-  const productLink = (product) => {
-    const split = product.split(" ");
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    const newLink = split.reduce(reducer);
-    return newLink;
+const ProductButton = () => {
+  const [products, setProducts] = useState([{ name: "-" }]);
+
+  const sendRequest = async () => {
+    const response = await fetch("https://tool-life.herokuapp.com/products");
+
+    const responseData = await response.json();
+
+    const products = responseData.products;
+    setProducts(products);
   };
- 
- 
-      const sendRequest = async () => {
-        const response = await fetch('https://tool-life.herokuapp.com/products');
-
-        const responseData = await response.json();
-       
-        const products = responseData.products;
-        setProducts(products);
-     
-
-        
-
-      }
-      useEffect(() => {
-        sendRequest();
-      }, [])
-      
-     
-
-  
+  useEffect(() => {
+    sendRequest();
+  }, []);
 
   return (
     <Styles>
@@ -71,7 +52,7 @@ const  ProductButton = () => {
       </DropdownButton>
     </Styles>
   );
-}
+};
 
 export default ProductButton;
-export {passedProducts};
+export { passedProducts };

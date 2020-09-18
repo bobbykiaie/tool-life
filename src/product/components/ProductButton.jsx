@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
 import { HashRouter as Router, Link, useParams } from "react-router-dom";
 import Options from "./Options";
-
 
 const Styles = styled.div`
   margin-top: 75px;
@@ -29,36 +27,29 @@ const Styles = styled.div`
   }
 `;
 
-
-
 function ProductButton() {
   const linkproduct = useParams();
-const productName = linkproduct.pid;
-console.log(productName);
-  const [components, setComponents] = useState([{name: "-"}])
+  const productName = linkproduct.pid;
+  console.log(productName);
+  const [components, setComponents] = useState([{ name: "-" }]);
 
+  const sendRequest = async () => {
+    const response = await fetch(
+      "https://tool-life.herokuapp.com/products/" + productName
+    );
 
+    const responseData = await response.json();
 
-  
-    const sendRequest = async () => {
-      const response = await fetch(('https://tool-life.herokuapp.com/products/')+productName);
-  
-      const responseData = await response.json();
-     
-      const components = await responseData.components.map(component => component.components);
-      
-      setComponents(components[0]);   
-      
-     
-        
-    }
+    const components = await responseData.components.map(
+      (component) => component.components
+    );
 
-    useEffect(() => {
+    setComponents(components[0]);
+  };
+
+  useEffect(() => {
     sendRequest();
-  
-  }, [])
- 
- 
+  }, []);
 
   const productLink = (product) => {
     const split = product.split(" ");
@@ -66,8 +57,6 @@ console.log(productName);
     const newLink = split.reduce(reducer);
     return newLink;
   };
-
- 
 
   return (
     <Styles>

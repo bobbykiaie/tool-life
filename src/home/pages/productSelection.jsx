@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import NavigationBar from "../../shared/NavigationBar";
 import ProductButton from "../components/ProductButton";
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Description from "../components/Description.jsx"
 import Logo from "../components/logo.png";
-
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -39,7 +38,7 @@ function ProductSelection() {
             <Row className="justify-content-center">
               <Col lg={5}>
                 <Description />
-                <Col xs={12} md={8} lg={6} xl={4}>
+                <Col xs={12} md={10} lg={8} xl={8}>
                     <ProductButton />
                 </Col>
               </Col>

@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { HashRouter as Router, Link } from "react-router-dom";
-import ModalDialog from "react-bootstrap/ModalDialog";
-import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalTitle from "react-bootstrap/ModalTitle";
 import { useParams } from "react-router-dom";
 
 const Options = (props) => {
@@ -13,7 +10,6 @@ const Options = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const selectedComponent = props.onload;
-  const productName = props.passedProduct;
 
   const [operation, setOperation] = useState([{ name: "-" }]);
 
@@ -22,12 +18,10 @@ const Options = (props) => {
     const response = await fetch(url
       
     );
-      console.log(url)
+
     const responseData = await response.json();
 
     setOperation(responseData.operations.programs)
-    console.log(responseData.operations.programs)
-    console.log("arse")
  
   };
 
