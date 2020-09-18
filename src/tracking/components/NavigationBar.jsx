@@ -6,7 +6,7 @@ import {
   HashRouter as Router,
   Link,
 } from "react-router-dom";
-
+//React Styles component
 const Styles = styled.div`
   .navbar {
     background-color: #017179;
