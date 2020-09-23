@@ -8,6 +8,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Modal from 'react-bootstrap/Modal'
 import styled from "styled-components";
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
+import TabContainer from 'react-bootstrap/TabContainer'
+import TabContent from 'react-bootstrap/TabContent'
+import Nav from 'react-bootstrap/Nav'
 
 
 const TheTable = () => {
@@ -27,9 +32,11 @@ const TheTable = () => {
   const handleShow = () => setShow(true);
 
  
-  const [db, setDb] = useState([{name: "-"}]);
+  
   const [arrayQ, setArrayQ] = useState([0]);
   const [tools, setTools] = useState([]);
+  const [currentTool, setCurrentTool] = useState([])
+  const [db, setDb] = useState([{name: "-"}]);
 
   const getRequest = async () => {
     try {
@@ -44,27 +51,46 @@ const TheTable = () => {
       const chosenComponent = await responseData[0].components.filter(component => component.name === cid);
       const chosenOperation = await chosenComponent[0].programs.filter(operation => operation.name === oid);
       const data = await chosenOperation[0].history;
-      const toolNames = chosenOperation[0].tools;
+      const toolNames = await chosenOperation[0].tools;
+      const initialData = await data.filter((tool)=> tool.tool === toolNames[0].name);
       setDb(data);
+      setCurrentTool(initialData)
       setTools(toolNames.map(tools => tools.name));
+    
+    
      
     }
     catch {
       console.log("Unable to get data from table")
     }
   }
+
+  const doIt = (event) => {
+    if (event === undefined) {
+      const filteredData = db.filter(data => data.tool === tools[0])
+      setCurrentTool(filteredData);
+    } else {
+    console.log(event.target.text)
+    console.log("i clicked")
+    const filteredData = db.filter(data => data.tool === event.target.text);
+    console.log(filteredData);
+    setCurrentTool(filteredData);
+  }
+  }
+
 const generateGraph = (event) => {
     const selectedTool = event.target.value;
-    const arse = db.filter(qty => qty.tool === selectedTool);
-    setArrayQ(arse.map((qty) => 
+    const toolchangeQuantity = db.filter(qty => qty.tool === selectedTool);
+    setArrayQ(toolchangeQuantity.map((qty) => 
       qty.quantity
     ));
- console.log(arse);
+ console.log(toolchangeQuantity);
  
 }
 
   useEffect(() => {
     getRequest();
+    doIt();
     
   }, [])
  
@@ -73,10 +99,25 @@ const generateGraph = (event) => {
   return (
     <React.Fragment>
     <Styles>
-    <Table onLoad={getRequest} striped bordered hover>
+    <Tab.Container  defaultActiveKey={tools[0]}>
+  <Row>
+    <Col sm={3}>
+      <Nav variant="tabs" className="flex-column">
+      {tools.map((tools) => (
+        <Nav.Item onClick={doIt} value={tools}>
+          <Nav.Link eventKey={tools}>{tools}</Nav.Link>
+        </Nav.Item>
+      ))}
+      </Nav>
+    </Col>
+    <Col sm={9}>
+      <Tab.Content>
+      {tools.map((tools) => (
+        <Tab.Pane eventKey={tools}>
+        <Table onLoad={getRequest} striped bordered hover>
       <thead>
         <tr>
-            <th>Tool #</th>
+          
           <th>Quantity</th>
           <th>Rotated</th>
           <th>Reason</th>
@@ -84,9 +125,9 @@ const generateGraph = (event) => {
       </thead>
       <tbody>
           {}
-          {db.map((data) => (
+          {currentTool.map((data) => (
             <tr>
-                <td>{data.tool}</td>
+               
               <td>{data.quantity}</td>
               <td>{data.rotated}</td>
               <td>{data.reason}</td>
@@ -94,15 +135,23 @@ const generateGraph = (event) => {
           ))}  
       </tbody>
     </Table>
-    {tools.map((tool) => (
-    <Button variant="info" value={tool}  onClick={(event) => {
+    <Button variant="info" value={currentTool[0].tool}  onClick={(event) => {
           handleShow();
           generateGraph(event);
         }}>
 
-        {tool}
+        Data
       </Button>
+        </Tab.Pane>
       ))}
+        <Tab.Pane eventKey="second">
+          
+        </Tab.Pane>
+      </Tab.Content>
+    </Col>
+  </Row>
+</Tab.Container>
+    
       
       <Modal show={show} onHide={handleClose}>
       <Container fluid>

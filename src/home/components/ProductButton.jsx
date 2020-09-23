@@ -3,6 +3,11 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
 import { HashRouter as Router, Link } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner'
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 
 const Styles = styled.div`
   margin-top: 75px;
@@ -38,11 +43,14 @@ const ProductButton = () => {
   return (
     <Styles>
       <DropdownButton
-        id="dropdown-basic-button"
+        id="dropdown-basic-button" 
         title="Select Product Line"
         background-color="#017179"
+        onClick={sendRequest}
       >
-        {products.map((product) => (
+      
+        {products[0].name === "-"?<Container><Row className="justify-content-center" ><Spinner size="sm" animation="border" variant="info" /></Row></Container>  :
+          products.map((product) => (
           <Dropdown.Item name={product.name}>
             <Router>
               <Link to={"/products/" + product.name}>{product.name}</Link>
